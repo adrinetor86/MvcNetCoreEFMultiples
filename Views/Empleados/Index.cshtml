@@ -1,0 +1,44 @@
+@model List<Empleado>
+
+<h1>Empleados</h1>
+
+<table class="table table-striped">
+
+    <thead>
+    <tr>
+        <th>ID Emp</th>
+        <th>Apellido</th>
+        <th>OFICIO</th>
+        <th>SALARIO</th>
+        <th>DEPT ID</th>
+        <th>NOMBRE</th>
+        <th>LOCALIDAD</th>
+        <th>Acciones</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Empleado emp in Model)
+    {
+        <tr>
+            <td> @emp.IdEmpleado</td>
+            <td> @emp.Apellido</td>
+            <td> @emp.Oficio</td>
+            <td> @emp.Salario</td>
+            <td> @emp.IdDepartamento</td>
+            <td> @emp.NombreDept</td>
+            <td> @emp.Localidad</td>
+            
+            <td>
+                <a asp-controller="Empleados"
+                   asp-action="Details"
+                   asp-route-idEmpleado="@emp.IdEmpleado">
+                    Details
+                </a>
+                
+            </td>
+   
+        </tr>
+    }
+    </tbody>
+</table>
