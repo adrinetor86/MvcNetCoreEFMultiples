@@ -7,9 +7,9 @@ namespace MvcNetCoreEFMultiples.Controllers;
 public class EmpleadosController : Controller
 {
 
-    private RepositoryEmpleados _repo;
+    private IRepositoryEmpleados _repo;
 
-    public EmpleadosController(RepositoryEmpleados repo)
+    public EmpleadosController(IRepositoryEmpleados repo)
     {
         _repo = repo;
     }
@@ -24,5 +24,21 @@ public class EmpleadosController : Controller
     {
         Empleado empleado= await _repo.GetEmpleadoByIdAsync(idEmpleado);
         return View(empleado);
+    }
+
+
+    public IActionResult Create()
+    {
+        return View();
+    } 
+     [HttpPost]
+    public async Task<IActionResult> Create(Emp empleado,string deptnombre)
+    {
+        
+        await _repo.InsertEmpleadoAsync(empleado.Apellido,
+            empleado.Oficio,empleado.Dir,empleado.Salario,
+            empleado.Comision,deptnombre);
+        
+        return RedirectToAction("Index");
     }
 }
